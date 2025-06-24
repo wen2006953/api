@@ -1,0 +1,45 @@
+server:
+  port: 9999
+  # 配置静态资源启用 gzip 压缩
+  compression:
+    enabled: true
+    min-response-size: 128
+
+# 配置主数据源
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://192.168.30.26/api?useSSL=false&useUnicode=true&characterEncoding=UTF8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+#  data:
+    # 配置mongo数据源
+#    mongodb:
+#      host: localhost
+#      port: 27017
+#      database: magicapi
+#      username: magicapi
+#      password: 123456
+  # 配置redis数据源
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 4
+#    timeout: 5000
+
+magic-api:
+  web: /magic/web
+  resource:
+    #配置文件存储位置。当以classpath开头时，为只读模式
+    #mac用户请改为可读写的目录
+    #如果不想存到文件中，可以参考配置将接口信息存到数据库、Redis中（或自定义）
+    location: D:/home/magic-api
+  task:
+    thread-name-prefix: magic-task- #线程池名字前缀
+    pool:
+      size: 8 #线程池大小，默认值为CPU核心数
+    shutdown:
+      awaitTermination: false #关闭时是否等待任务执行完毕，默认为false
+      awaitTerminationPeriod: 10s # 关闭时最多等待任务执行完毕的时间
