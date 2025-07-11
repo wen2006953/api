@@ -1,0 +1,14 @@
+{
+  "properties" : { },
+  "id" : "93b42cd8442847009de622eda9eb474a",
+  "name" : "定时任务",
+  "type" : "task",
+  "parentId" : "0",
+  "path" : "task",
+  "createTime" : 1748944892514,
+  "updateTime" : null,
+  "createBy" : null,
+  "updateBy" : null,
+  "paths" : [ ],
+  "options" : [ ]
+}

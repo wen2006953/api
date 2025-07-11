@@ -1,0 +1,98 @@
+{
+  "properties" : { },
+  "id" : "87a0deddab584ff595d3251705c404de",
+  "script" : null,
+  "groupId" : "51b8e2f8af6c4e06b298f545e7abbdc9",
+  "name" : "查询所有",
+  "createTime" : 1748942861599,
+  "updateTime" : 1752120477132,
+  "lock" : null,
+  "createBy" : null,
+  "updateBy" : null,
+  "path" : "/query",
+  "method" : "GET",
+  "parameters" : [ ],
+  "options" : [ ],
+  "requestBody" : "",
+  "headers" : [ ],
+  "paths" : [ ],
+  "responseBody" : "{\n    \"code\": 1,\n    \"message\": \"success\",\n    \"data\": [],\n    \"timestamp\": 1752120468221,\n    \"executeTime\": 30\n}",
+  "description" : null,
+  "requestBodyDefinition" : null,
+  "responseBodyDefinition" : {
+    "name" : "",
+    "value" : "",
+    "description" : "",
+    "required" : false,
+    "dataType" : "Object",
+    "type" : null,
+    "defaultValue" : null,
+    "validateType" : "",
+    "error" : "",
+    "expression" : "",
+    "children" : [ {
+      "name" : "code",
+      "value" : "1",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Integer",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "message",
+      "value" : "success",
+      "description" : "",
+      "required" : false,
+      "dataType" : "String",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "data",
+      "value" : "",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Array",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "timestamp",
+      "value" : "1752120447131",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Long",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    }, {
+      "name" : "executeTime",
+      "value" : "25763",
+      "description" : "",
+      "required" : false,
+      "dataType" : "Integer",
+      "type" : null,
+      "defaultValue" : null,
+      "validateType" : "",
+      "error" : "",
+      "expression" : "",
+      "children" : [ ]
+    } ]
+  }
+}
+================================
+// return db.table("data").where().gte('create_time', now()).select()
+return db.ofdb.table('salebilltable').where().lte('ORDERTIME', now()).eq('rownum', 1).select()

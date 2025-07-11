@@ -1,17 +1,32 @@
 package org.ssssssss.example.configuration;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+
+import javax.sql.DataSource;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 import org.ssssssss.example.interceptor.CustomRequestInterceptor;
 import org.ssssssss.example.interceptor.CustomUIAuthorizationInterceptor;
-import org.ssssssss.example.provider.*;
+import org.ssssssss.example.provider.CustomJsonValueProvider;
+import org.ssssssss.example.provider.CustomLanguageProvider;
+import org.ssssssss.example.provider.CustomMapperProvider;
+import org.ssssssss.example.provider.CustomPageProvider;
+import org.ssssssss.example.provider.CustomSqlCache;
 import org.ssssssss.example.scripts.CustomFunction;
 import org.ssssssss.example.scripts.CustomFunctionExtension;
 import org.ssssssss.example.scripts.CustomModule;
 import org.ssssssss.magicapi.datasource.model.MagicDynamicDataSource;
 import org.ssssssss.magicapi.modules.db.provider.PageProvider;
-
-import javax.sql.DataSource;
+import org.ssssssss.magicapi.modules.http.HttpModule;
 
 /**
  * magic-api 配置类
@@ -33,6 +48,30 @@ public class MagicAPIConfiguration {
 		dynamicDataSource.add("slave", dataSource);
 		return dynamicDataSource;
 	}
+	
+    private RestTemplate template() {
+        SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+        factory.setReadTimeout(500);
+        factory.setConnectTimeout(500);
+        
+        RestTemplate template = new RestTemplate();
+        template.setRequestFactory(factory);
+        template.getMessageConverters().add(new StringHttpMessageConverter(StandardCharsets.UTF_8) {
+            {
+                setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+            }
+
+            @Override
+            public boolean supports(Class<?> clazz) {
+                return true;
+            }
+        });
+        return template;
+    }
+	@Bean
+    public HttpModule httpModule() {
+        return new HttpModule(template());
+    }
 
 
 	/**

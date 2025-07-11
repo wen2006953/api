@@ -1,0 +1,19 @@
+{
+  "properties" : { },
+  "id" : "88ac514f0dca4dffa49c0277f1a6b6f6",
+  "script" : null,
+  "groupId" : "datasource:0",
+  "name" : "ofdb",
+  "createTime" : 1752120140241,
+  "updateTime" : 1752120398469,
+  "lock" : null,
+  "createBy" : null,
+  "updateBy" : null,
+  "url" : "jdbc:oracle:thin:@172.19.97.252:1521:ofdb",
+  "username" : "ofcardoramanager",
+  "password" : "ofcard",
+  "key" : "ofdb",
+  "maxRows" : -1,
+  "driverClassName" : "oracle.jdbc.driver.OracleDriver",
+  "type" : "com.zaxxer.hikari.HikariDataSource"
+}
