@@ -51,8 +51,8 @@ public class MagicAPIConfiguration {
 	
     private RestTemplate template() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setReadTimeout(500);
-        factory.setConnectTimeout(500);
+        factory.setConnectTimeout(2000);
+        factory.setReadTimeout(30000);
         
         RestTemplate template = new RestTemplate();
         template.setRequestFactory(factory);
