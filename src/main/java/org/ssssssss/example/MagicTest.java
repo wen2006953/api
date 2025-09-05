@@ -2,9 +2,7 @@ package org.ssssssss.example;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.script.ScriptEngine;
@@ -16,6 +14,7 @@ import org.ssssssss.script.MagicScriptEngineFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.InputStreamResource;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.http.HttpUtil;
@@ -23,9 +22,34 @@ import cn.hutool.http.HttpUtil;
 public class MagicTest {
 
     public static void main(String[] args) throws Exception {
-        uploadImg();
+        ocrImg2();
     }
     
+    public static void ocrImg2() throws IOException {
+        String imgUrl = "http://easyapi.admin.suhan.cn/easyapi/yw/cs/down?name=453752a85f8ebb6ee501561c8fb0807b.png";
+        byte[] bs = HttpUtil.createGet(imgUrl, true).execute().bodyBytes();
+        
+        String uploadUrl = "http://easyapi.admin.suhan.cn/easyapi/yw/cs2/group?type=101";
+        String res = HttpUtil.createPost(uploadUrl).form("img", bs, "aaa.png").execute().body();
+        System.out.println(res);
+    }
+    public static void ocrImg() throws IOException {
+        String imgUrl = "http://easyapi.admin.suhan.cn/easyapi/yw/cs/down?name=453752a85f8ebb6ee501561c8fb0807b.png";
+        byte[] bs = HttpUtil.createGet(imgUrl, true).execute().bodyBytes();
+        
+        String uploadUrl = "http://172.28.1.226:8989/postOcrImg?orderid=ID00328833&ocrtype=2";
+        String res = HttpUtil.createPost(uploadUrl).body(bs).timeout(15000).execute().body();
+        System.out.println(res);
+    }
+    
+    public static void uploadImg2() throws IOException {
+        String imgUrl = "http://easyapi.admin.suhan.cn/easyapi/yw/cs/down?name=453752a85f8ebb6ee501561c8fb0807b.png";
+        byte[] bs = HttpUtil.createGet(imgUrl, true).execute().bodyBytes();
+        
+        String uploadUrl = "http://192.168.60.99:9999/test/stream";
+        byte[] res = HttpUtil.createPost(uploadUrl).form("img", bs, "aaa.png").timeout(15000).execute().bodyBytes();
+        FileUtil.writeBytes(res, "D:/opt/aaa.png");
+    }
     public static void uploadImg() throws IOException {
         String uploadUrl = "http://nimg.dev.suhan.cn/1061/upload";
         URL url = new URL("http://easyapi.admin.suhan.cn/easyapi/yw/cs/down?name=99b8fe667f567feb0e46968552663fe7.jpg");
